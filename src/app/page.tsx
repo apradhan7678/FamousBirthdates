@@ -7,27 +7,34 @@ import ThemeToggle from "@/components/ThemeToggle";
 import {
   getFamousPeopleForDate,
   formatDate,
-  FamousPerson,
-} from "@/utils/fakeData";
+  WikimediaPerson,
+} from "@/utils/wikimediaApi";
 import styles from "./page.module.css";
 
 export default function Home() {
-  const [famousPeople, setFamousPeople] = useState<FamousPerson[]>([]);
+  const [famousPeople, setFamousPeople] = useState<WikimediaPerson[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (birthdate: Date) => {
     setIsLoading(true);
+    setError(null);
     setSelectedDate(birthdate);
 
-    // Simulate API delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log("🔍 Searching for famous people for:", birthdate);
 
-    const people = getFamousPeopleForDate(birthdate);
-    setFamousPeople(people);
-    setHasSearched(true);
-    setIsLoading(false);
+    try {
+      const people = await getFamousPeopleForDate(birthdate);
+      setFamousPeople(people);
+      setHasSearched(true);
+    } catch (err) {
+      setError("Failed to fetch famous people. Please try again.");
+      console.error("Error fetching famous people:", err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -45,7 +52,15 @@ export default function Home() {
           <BirthdateForm onSubmit={handleSubmit} isLoading={isLoading} />
         </section>
 
-        {hasSearched && (
+        {error && (
+          <section className={styles.errorSection}>
+            <div className={styles.errorMessage}>
+              <p>{error}</p>
+            </div>
+          </section>
+        )}
+
+        {hasSearched && !error && (
           <section className={styles.resultsSection}>
             {selectedDate && (
               <div className={styles.dateDisplay}>
@@ -58,17 +73,30 @@ export default function Home() {
                 <div className={styles.spinner}></div>
                 <p>Finding famous people...</p>
               </div>
-            ) : (
+            ) : famousPeople.length > 0 ? (
               <div className={styles.cardsGrid}>
                 {famousPeople.map((person) => (
                   <FamousPersonCard key={person.id} person={person} />
                 ))}
               </div>
+            ) : (
+              <div className={styles.noResults}>
+                <div className={styles.noResultsIcon}>🔍</div>
+                <h3>No Information Found</h3>
+                <p>
+                  We couldn&apos;t find any famous people born on this date in
+                  our database.
+                </p>
+                <p>
+                  Try a different date or check back later as we continue to
+                  expand our data.
+                </p>
+              </div>
             )}
           </section>
         )}
 
-        {!hasSearched && !isLoading && (
+        {!hasSearched && !isLoading && !error && (
           <section className={styles.placeholder}>
             <div className={styles.placeholderContent}>
               <div className={styles.placeholderIcon}>🎂</div>

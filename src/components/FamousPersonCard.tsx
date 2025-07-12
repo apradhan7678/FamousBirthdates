@@ -1,10 +1,10 @@
 "use client";
 
-import { FamousPerson } from "@/utils/fakeData";
+import { WikimediaPerson } from "@/utils/wikimediaApi";
 import styles from "./FamousPersonCard.module.css";
 
 interface FamousPersonCardProps {
-  person: FamousPerson;
+  person: WikimediaPerson;
   className?: string;
 }
 
@@ -22,6 +22,19 @@ export default function FamousPersonCard({
         <div className={styles.year}>{person.birthYear}</div>
       </div>
 
+      {person.imageUrl && (
+        <div className={styles.imageContainer}>
+          <img
+            src={person.imageUrl}
+            alt={person.name}
+            className={styles.personImage}
+            onError={(e) => {
+              e.currentTarget.style.display = "none";
+            }}
+          />
+        </div>
+      )}
+
       <div className={styles.content}>
         <div className={styles.background}>
           <p>{person.background}</p>
@@ -37,6 +50,19 @@ export default function FamousPersonCard({
             ))}
           </ul>
         </div>
+
+        {person.wikipediaUrl && (
+          <div className={styles.wikipediaLink}>
+            <a
+              href={person.wikipediaUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.wikiButton}
+            >
+              Read More on Wikipedia
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );

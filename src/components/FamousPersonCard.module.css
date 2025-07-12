@@ -55,6 +55,22 @@
   font-family: var(--font-sans);
 }
 
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: calc(var(--radius) - 4px);
+  background: var(--muted);
+}
+
+.personImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: calc(var(--radius) - 4px);
+}
+
 .content {
   display: flex;
   flex-direction: column;
@@ -108,6 +124,30 @@
   font-weight: bold;
 }
 
+.wikipediaLink {
+  margin-top: 8px;
+}
+
+.wikiButton {
+  display: inline-block;
+  padding: 8px 16px;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  text-decoration: none;
+  border-radius: calc(var(--radius) - 4px);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 150ms ease-in-out;
+  font-family: var(--font-sans);
+}
+
+.wikiButton:hover {
+  background: var(--primary);
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
 @media (max-width: 768px) {
   .card {
     padding: 16px;
@@ -125,5 +165,9 @@
 
   .year {
     align-self: flex-start;
+  }
+
+  .personImage {
+    height: 150px;
   }
 }
