@@ -22,9 +22,14 @@
 .header {
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   color: var(--primary-foreground);
-  padding: 48px 32px;
   text-align: center;
-  border-bottom: 1px solid var(--border);
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-height: 400px;
 }
 
 .title {
@@ -222,6 +227,7 @@
 
   .header {
     padding: 32px 24px;
+    min-height: 20rem;
   }
 
   .title {
@@ -270,6 +276,7 @@
 @media (max-width: 480px) {
   .header {
     padding: 24px 16px;
+    min-height: 20rem;
   }
 
   .title {

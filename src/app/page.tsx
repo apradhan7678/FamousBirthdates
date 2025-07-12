@@ -4,6 +4,7 @@ import { useState } from "react";
 import BirthdateForm from "@/components/BirthdateForm";
 import FamousPersonCard from "@/components/FamousPersonCard";
 import ThemeToggle from "@/components/ThemeToggle";
+import { BackgroundLines } from "@/components/ui/background-lines";
 import {
   getFamousPeopleForDate,
   formatDate,
@@ -41,12 +42,12 @@ export default function Home() {
     <main className={styles.main}>
       <ThemeToggle />
       <div className={styles.container}>
-        <header className={styles.header}>
+        <BackgroundLines className={styles.header} svgOptions={{ duration: 8 }}>
           <h1 className={styles.title}>Famous Birthdates</h1>
           <p className={styles.subtitle}>
             Discover the famous people who share your birthdate
           </p>
-        </header>
+        </BackgroundLines>
 
         <section className={styles.formSection}>
           <BirthdateForm onSubmit={handleSubmit} isLoading={isLoading} />
