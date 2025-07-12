@@ -82,8 +82,12 @@ export default function Home() {
                 </div>
               ) : famousPeople.length > 0 ? (
                 <div className={styles.cardsGrid}>
-                  {famousPeople.map((person) => (
-                    <FamousPersonCard key={person.id} person={person} />
+                  {famousPeople.map((person, index) => (
+                    <FamousPersonCard
+                      key={person.id}
+                      person={person}
+                      className={styles[`cardDelay${index}`]}
+                    />
                   ))}
                 </div>
               ) : (
