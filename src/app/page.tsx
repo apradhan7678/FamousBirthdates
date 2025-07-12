@@ -5,6 +5,7 @@ import BirthdateForm from "@/components/BirthdateForm";
 import FamousPersonCard from "@/components/FamousPersonCard";
 import ThemeToggle from "@/components/ThemeToggle";
 import { BackgroundLines } from "@/components/ui/background-lines";
+import { AuroraBackground } from "@/components/ui/aurora-background";
 import {
   getFamousPeopleForDate,
   formatDate,
@@ -39,7 +40,7 @@ export default function Home() {
   };
 
   return (
-    <main className={styles.main}>
+    <AuroraBackground className={styles.main}>
       <ThemeToggle />
       <div className={styles.container}>
         <BackgroundLines className={styles.header} svgOptions={{ duration: 8 }}>
@@ -107,6 +108,6 @@ export default function Home() {
           </section>
         )}
       </div>
-    </main>
+    </AuroraBackground>
   );
 }
