@@ -6,6 +6,7 @@ import FamousPersonCard from "@/components/FamousPersonCard";
 import ThemeToggle from "@/components/ThemeToggle";
 import { BackgroundLines } from "@/components/ui/background-lines";
 import { AuroraBackground } from "@/components/ui/aurora-background";
+import { TracingBeam } from "@/components/ui/tracing-beam";
 import {
   getFamousPeopleForDate,
   formatDate,
@@ -41,73 +42,78 @@ export default function Home() {
 
   return (
     <AuroraBackground className={styles.main}>
-      <ThemeToggle />
-      <div className={styles.container}>
-        <BackgroundLines className={styles.header} svgOptions={{ duration: 8 }}>
-          <h1 className={styles.title}>Famous Birthdates</h1>
-          <p className={styles.subtitle}>
-            Discover the famous people who share your birthdate
-          </p>
-        </BackgroundLines>
+      <TracingBeam className={styles.tracingBeam}>
+        <ThemeToggle />
+        <div className={styles.container}>
+          <BackgroundLines
+            className={styles.header}
+            svgOptions={{ duration: 8 }}
+          >
+            <h1 className={styles.title}>Famous Birthdates</h1>
+            <p className={styles.subtitle}>
+              Discover the famous people who share your birthdate
+            </p>
+          </BackgroundLines>
 
-        <section className={styles.formSection}>
-          <BirthdateForm onSubmit={handleSubmit} isLoading={isLoading} />
-        </section>
-
-        {error && (
-          <section className={styles.errorSection}>
-            <div className={styles.errorMessage}>
-              <p>{error}</p>
-            </div>
+          <section className={styles.formSection}>
+            <BirthdateForm onSubmit={handleSubmit} isLoading={isLoading} />
           </section>
-        )}
 
-        {hasSearched && !error && (
-          <section className={styles.resultsSection}>
-            {selectedDate && (
-              <div className={styles.dateDisplay}>
-                <h2>Famous People Born on {formatDate(selectedDate)}</h2>
+          {error && (
+            <section className={styles.errorSection}>
+              <div className={styles.errorMessage}>
+                <p>{error}</p>
               </div>
-            )}
+            </section>
+          )}
 
-            {isLoading ? (
-              <div className={styles.loading}>
-                <div className={styles.spinner}></div>
-                <p>Finding famous people...</p>
-              </div>
-            ) : famousPeople.length > 0 ? (
-              <div className={styles.cardsGrid}>
-                {famousPeople.map((person) => (
-                  <FamousPersonCard key={person.id} person={person} />
-                ))}
-              </div>
-            ) : (
-              <div className={styles.noResults}>
-                <div className={styles.noResultsIcon}>🔍</div>
-                <h3>No Information Found</h3>
-                <p>
-                  We couldn&apos;t find any famous people born on this date
-                  using the Wikimedia database.
-                </p>
-                <p>
-                  Try a different date or check back later as we continue to
-                  expand our data.
-                </p>
-              </div>
-            )}
-          </section>
-        )}
+          {hasSearched && !error && (
+            <section className={styles.resultsSection}>
+              {selectedDate && (
+                <div className={styles.dateDisplay}>
+                  <h2>Famous People Born on {formatDate(selectedDate)}</h2>
+                </div>
+              )}
 
-        {!hasSearched && !isLoading && !error && (
-          <section className={styles.placeholder}>
-            <div className={styles.placeholderContent}>
-              <div className={styles.placeholderIcon}>🎂</div>
-              <h3>Enter your birthdate to get started</h3>
-              <p>Find out which famous people share your special day!</p>
-            </div>
-          </section>
-        )}
-      </div>
+              {isLoading ? (
+                <div className={styles.loading}>
+                  <div className={styles.spinner}></div>
+                  <p>Finding famous people...</p>
+                </div>
+              ) : famousPeople.length > 0 ? (
+                <div className={styles.cardsGrid}>
+                  {famousPeople.map((person) => (
+                    <FamousPersonCard key={person.id} person={person} />
+                  ))}
+                </div>
+              ) : (
+                <div className={styles.noResults}>
+                  <div className={styles.noResultsIcon}>🔍</div>
+                  <h3>No Information Found</h3>
+                  <p>
+                    We couldn&apos;t find any famous people born on this date
+                    using the Wikimedia database.
+                  </p>
+                  <p>
+                    Try a different date or check back later as we continue to
+                    expand our data.
+                  </p>
+                </div>
+              )}
+            </section>
+          )}
+
+          {!hasSearched && !isLoading && !error && (
+            <section className={styles.placeholder}>
+              <div className={styles.placeholderContent}>
+                <div className={styles.placeholderIcon}>🎂</div>
+                <h3>Enter your birthdate to get started</h3>
+                <p>Find out which famous people share your special day!</p>
+              </div>
+            </section>
+          )}
+        </div>
+      </TracingBeam>
     </AuroraBackground>
   );
 }

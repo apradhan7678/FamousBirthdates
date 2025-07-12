@@ -28,6 +28,12 @@
   background: rgba(0, 0, 0, 0.8);
 }
 
+.tracingBeam {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .header {
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   color: var(--primary-foreground);
@@ -162,6 +168,8 @@
   align-items: center;
   min-height: 300px;
   background: var(--background);
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
 }
 
 .placeholderContent {
