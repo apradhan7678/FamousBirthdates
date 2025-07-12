@@ -84,8 +84,8 @@ export default function Home() {
                 <div className={styles.noResultsIcon}>🔍</div>
                 <h3>No Information Found</h3>
                 <p>
-                  We couldn&apos;t find any famous people born on this date in
-                  our database.
+                  We couldn&apos;t find any famous people born on this date
+                  using the Wikimedia database.
                 </p>
                 <p>
                   Try a different date or check back later as we continue to
