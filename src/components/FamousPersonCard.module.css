@@ -9,11 +9,15 @@
   transition: all 150ms ease-in-out;
   border: 1px solid var(--border);
   font-family: var(--font-sans);
+  height: 100%;
+  min-height: 400px;
 }
 
-.card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
 }
 
 .header {
