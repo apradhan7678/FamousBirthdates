@@ -17,13 +17,22 @@ export default function BirthdateForm({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (birthdate) {
-      onSubmit(new Date(birthdate));
+      // Create date in local timezone to avoid timezone issues
+      const [year, month, day] = birthdate.split("-").map(Number);
+      const date = new Date(year, month - 1, day); // month is 0-indexed
+      console.log("Original input:", birthdate);
+      console.log("Created date:", date);
+      console.log("Date parts:", { year, month, day });
+      onSubmit(date);
     }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && birthdate) {
-      onSubmit(new Date(birthdate));
+      // Create date in local timezone to avoid timezone issues
+      const [year, month, day] = birthdate.split("-").map(Number);
+      const date = new Date(year, month - 1, day); // month is 0-indexed
+      onSubmit(date);
     }
   };
 
@@ -38,7 +47,10 @@ export default function BirthdateForm({
             type="date"
             id="birthdate"
             value={birthdate}
-            onChange={(e) => setBirthdate(e.target.value)}
+            onChange={(e) => {
+              console.log(e.target.value);
+              setBirthdate(e.target.value);
+            }}
             onKeyPress={handleKeyPress}
             className={styles.input}
             required
